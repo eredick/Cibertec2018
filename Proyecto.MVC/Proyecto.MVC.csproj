@@ -154,6 +154,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CategorieController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,10 +200,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Categorie\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -214,6 +220,24 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Proyecto.Models\Proyecto.Models.csproj">
+      <Project>{86a1181e-c6ba-4f77-88d4-a29edd9a3060}</Project>
+      <Name>Proyecto.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Proyecto.Repositories.Dapper\Proyecto.Repositories.Dapper.csproj">
+      <Project>{ea2e9a43-5714-4b37-8c90-3c0e825f21dd}</Project>
+      <Name>Proyecto.Repositories.Dapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Proyecto.Repositories\Proyecto.Repositories.csproj">
+      <Project>{c5322c60-18aa-4e07-a0af-3fee11f89195}</Project>
+      <Name>Proyecto.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Proyecto.UnitOfWork\Proyecto.UnitOfWork.csproj">
+      <Project>{34e818ac-7501-4ade-92c1-cc753679f5de}</Project>
+      <Name>Proyecto.UnitOfWork</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -41,7 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRepository.cs" />
+    <Compile Include="Northwind\ICategorieRepository.cs" />
+    <Compile Include="Northwind\ICustomerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Proyecto.Models\Proyecto.Models.csproj">
+      <Project>{86a1181e-c6ba-4f77-88d4-a29edd9a3060}</Project>
+      <Name>Proyecto.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

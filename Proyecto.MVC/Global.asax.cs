@@ -1,11 +1,15 @@
 ﻿using log4net;
 using log4net.Core;
+using Proyecto.Repositories.Dapper.Northwind;
+using Proyecto.UnitOfWork;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -19,7 +23,8 @@ namespace Proyecto.MVC
         {
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
-            //container.Register<IU>
+            container.Register<IUnitOfWork>(() => new NorthwindUnitOfWork(ConfigurationManager.ConnectionStrings["cnxProject"].ToString()));
+            container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
             container.RegisterConditional(typeof(ILog), c => typeof(Log4NetAdapter<>).MakeGenericType(c.Consumer.ImplementationType), Lifestyle.Singleton, c => true);
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
