@@ -43,6 +43,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="Northwind\ICategorieRepository.cs" />
     <Compile Include="Northwind\ICustomerRepository.cs" />
+    <Compile Include="Northwind\IEmployeeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

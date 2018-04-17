@@ -7,9 +7,9 @@ using Proyecto.UnitOfWork;
 
 namespace Proyecto.MVC.Controllers
 {
-    public class CategorieController : BaseController
+    public class CategoryController : BaseController
     {
-        public CategorieController(IUnitOfWork unit) : base(unit)
+        public CategoryController(IUnitOfWork unit) : base(unit)
         {
         }
 

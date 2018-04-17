@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Proyecto.Models
 {
-    public class Categorie
+    [Table("Categories")]
+    public class Category
     {
         [Key]
         public int CategoryID { get; set; }

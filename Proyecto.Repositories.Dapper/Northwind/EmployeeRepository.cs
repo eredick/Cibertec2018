@@ -10,23 +10,18 @@ using System.Threading.Tasks;
 
 namespace Proyecto.Repositories.Dapper.Northwind
 {
-    public class CategorieRepository : Repository<Category>, ICategorieRepository
+    public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
     {
-        public CategorieRepository(string connectionString) : base(connectionString)
+        public EmployeeRepository(string connectionString) : base(connectionString)
         {
         }
 
-        public Category GetCategorieById(int Id)
+        public Employee GetEmployeeById(int Id)
         {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var categories = connection.Get<Category>(Id);
-                return categories;
-            }
+            throw new NotImplementedException();
         }
 
-        public int InsertCategorie(Category entity)
+        public int InsertEmployee(Employee entity)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -34,7 +29,7 @@ namespace Proyecto.Repositories.Dapper.Northwind
             }
         }
 
-        public bool UpdateCategorie(Category entity)
+        public bool UpdateEmployee(Employee entity)
         {
             throw new NotImplementedException();
         }
