@@ -9,10 +9,10 @@ namespace Proyecto.Repositories
     public interface IRepository<T> where T : class
     {
         int Insert(T entity);
-        bool Delete(T entity);
+        //bool Delete(int Id);
         bool Update(T entity);
         IEnumerable<T> GetList();
         //T GetById(string id);
-        T GetById(int id);
+        T GetById(int Id);
     }
 }

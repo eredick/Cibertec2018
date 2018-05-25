@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Proyecto.Models;
+using Proyecto.UnitOfWork;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,21 +11,28 @@ namespace Proyecto.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        protected readonly IUnitOfWork _unit;
+
+        public HomeController(IUnitOfWork unit)
+        {
+            _unit = unit;
+        }
         public ActionResult Index()
         {
-            return View();
+            //ViewBag.lProduct = JsonConvert.SerializeObject();
+            return View(_unit.Product.GetList());
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Proyecto MVC - CIBERTEC";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Dessarrollado por Erick Gonzales";
 
             return View();
         }

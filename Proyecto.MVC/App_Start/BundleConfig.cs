@@ -26,6 +26,14 @@ namespace Proyecto.MVC
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/dx").Include(
+                      "~/Scripts/dx/dx.all.js"));
+
+            bundles.Add(new StyleBundle("~/Content/dxcss").Include(
+                      "~/Scripts/dx/dx.common.css",
+                      "~/Scripts/dx/dx.light.css",
+                      "~/Scripts/dx/dx.spa.css"));
         }
     }
 }

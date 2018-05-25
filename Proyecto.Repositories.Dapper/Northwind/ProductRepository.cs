@@ -1,4 +1,6 @@
 ﻿using Dapper.Contrib.Extensions;
+using Proyecto.Models;
+using Proyecto.Repositories.Northwind;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -6,34 +8,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Proyecto.Repositories.Dapper
+namespace Proyecto.Repositories.Dapper.Northwind
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class ProductRepository : Repository<Product>, IProductRepository
     {
-        protected string _connectionString;
-
-        public Repository(string connectionString)
+        public ProductRepository(string connectionString) : base(connectionString)
         {
-            _connectionString = connectionString;
         }
 
-        public T GetById(int id)
+        public bool DeleteProduct(int Id)
         {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                return connection.Get<T>(id);
-            }
+            throw new NotImplementedException();
         }
 
-        public IEnumerable<T> GetList()
+        public Product GetProductById(int Id)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                return connection.GetAll<T>();
+                return connection.Get<Product>(Id);
             }
         }
 
-        public int Insert(T entity)
+        public int InsertProduct(Product entity)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -41,7 +37,7 @@ namespace Proyecto.Repositories.Dapper
             }
         }
 
-        public bool Update(T entity)
+        public bool UpdateProduct(Product entity)
         {
             using (var connection = new SqlConnection(_connectionString))
             {

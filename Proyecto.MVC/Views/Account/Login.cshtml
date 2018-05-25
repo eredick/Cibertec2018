@@ -1,7 +1,7 @@
-﻿@model Proyecto.Models.ViewModels.LoginViewModel
+﻿@model Proyecto.Models.ViewModels.LoginVM
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Acceder al Sistema";
 }
 
 <h2>Login</h2>
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>LoginViewModel</h4>
+        <h4>Ingrese su usuario y clave</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -33,15 +33,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Acceder" class="btn btn-default" />
+                <input type="submit" value="Acceder" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

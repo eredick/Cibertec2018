@@ -51,6 +51,8 @@
     <Compile Include="Northwind\CustomerRespository.cs" />
     <Compile Include="Northwind\EmployeeRepository.cs" />
     <Compile Include="Northwind\NorthwindUnitOfWork.cs" />
+    <Compile Include="Northwind\ProductRepository.cs" />
+    <Compile Include="Northwind\SupplierRepository.cs" />
     <Compile Include="Northwind\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />

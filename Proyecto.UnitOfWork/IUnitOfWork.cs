@@ -12,5 +12,7 @@ namespace Proyecto.UnitOfWork
         ICategorieRepository Categories { get; }
         ICustomerRepository Customers { get; }
         IUserRepository Users { get; }
+        ISupplierRepository Supplier { get; }
+        IProductRepository Product { get; }
     }
 }

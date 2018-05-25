@@ -14,13 +14,7 @@ namespace Proyecto.MVC.Controllers
         public AccountController(IUnitOfWork unit) : base(unit)
         {
         }
-
-        [AllowAnonymous]
-        public ActionResult Index()
-        {
-            return RedirectToAction("Login", "Account");
-        }
-
+        
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -29,7 +23,7 @@ namespace Proyecto.MVC.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(LoginViewModel model)
+        public ActionResult Login(LoginVM model)
         {
             var user = _unit.Users.ValidateUser(model.Email, model.Password);
             if (user == null)

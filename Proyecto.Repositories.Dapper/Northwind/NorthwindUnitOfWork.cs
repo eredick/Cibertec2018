@@ -15,9 +15,13 @@ namespace Proyecto.Repositories.Dapper.Northwind
             Categories = new CategorieRepository(connectionString);
             Customers = new CustomerRespository(connectionString);
             Users = new UserRepository(connectionString);
+            Supplier = new SupplierRepository(connectionString);
+            Product = new ProductRepository(connectionString);
         }
         public ICategorieRepository Categories { get; set; }
         public ICustomerRepository Customers { get; set; }
         public IUserRepository Users { get; set; }
+        public ISupplierRepository Supplier { get; set; }
+        public IProductRepository Product { get; }
     }
 }

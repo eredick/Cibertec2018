@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Proyecto.MVC.Controllers
 {
+    [Authorize]
     public class BaseController : Controller
     {
         protected readonly IUnitOfWork _unit;

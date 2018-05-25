@@ -1,0 +1,22 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li class="navbar-text">
+            @User.Identity.Name
+        </li>
+        <li>
+            @Html.ActionLink("Cerrar Sesión", "Logout", "Account")
+        </li>
+    </ul>
+}
+else
+{
+    if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString() != "Login")
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Iniciar Sesión", "Login", "Account")
+            </li>
+        </ul>
+    }
+}

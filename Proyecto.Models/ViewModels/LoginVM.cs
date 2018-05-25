@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proyecto.Models.ViewModels
 {
-    public class LoginViewModel
+    public class LoginVM
     {
         [Required]
         [DataType(DataType.EmailAddress)]
