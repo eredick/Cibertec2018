@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Producto", "Create")
+</p>
+
+<div id="dgProducts"></div>
+
+@Modal.GetModal();
+
+@section scripts{
+    <script src="~/app/product.js" type="text/javascript"></script>
+}

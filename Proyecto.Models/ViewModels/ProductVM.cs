@@ -13,10 +13,14 @@ namespace Proyecto.Models.ViewModels
         [Required]
         [Display(Name = "Producto")]
         public string ProductName { get; set; }
-        [Display(Name = "Proveedor")]
+        [Display(Name = "Cod.Proveedor")]
         public int SupplierID { get; set; }
-        [Display(Name = "Categoria")]
+        [Display(Name = "Compañía")]
+        public string CompanyName { get; set; }
+        [Display(Name = "Cod.Categoria")]
         public int CategoryID { get; set; }
+        [Display(Name = "Categoría")]
+        public string CategoryName { get; set; }
         [Display(Name = "Cantidad Por Unidad")]
         public string QuantityPerUnit { get; set; }
         [Required]
@@ -27,6 +31,8 @@ namespace Proyecto.Models.ViewModels
         [Display(Name = "En Ordenes")]
         public int UnitsOnOrder { get; set; }
         public int ReorderLevel { get; set; }
+        [Display(Name = "Imagen")]
+        public byte[] Picture { get; set; }
         [Display(Name = "Descontinuado")]
         public bool Discontinued { get; set; }
     }

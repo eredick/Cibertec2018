@@ -1,4 +1,5 @@
-﻿using Proyecto.UnitOfWork;
+﻿using Proyecto.MVC.ActionFilters;
+using Proyecto.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Proyecto.MVC.Controllers
 {
-    [Authorize]
+    [CustomAuthorize]
     public class BaseController : Controller
     {
         protected readonly IUnitOfWork _unit;
