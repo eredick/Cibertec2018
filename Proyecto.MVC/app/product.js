@@ -87,7 +87,7 @@ $('#dgProducts').dxDataGrid({
                     $.get('/Product/Edit', param, function (data) {
                         $(".modal-body").html(data);
                         $(".modal-title").html("Editar Producto");
-                    }, 'json');
+                    });
                 });
             $('<div class="col-md-6">').appendTo(container.find('.row'));
             $('<span id="d_' + options.data.ProductID + '" class="glyphicon glyphicon-trash">').appendTo(container.find('.col-md-6:last-child'))
