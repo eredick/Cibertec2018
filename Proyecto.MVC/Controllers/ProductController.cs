@@ -46,6 +46,10 @@ namespace Proyecto.MVC.Controllers
                 UnitsInStock = product.UnitsInStock,
                 UnitsOnOrder = product.UnitsOnOrder
             };
+
+            ViewBag.cmbSupplier = _unit.Supplier.GetList();
+            ViewBag.cmbCategory = _unit.Categories.GetList();
+
             return PartialView("_Edit", productVM);
         }
 
@@ -66,7 +70,8 @@ namespace Proyecto.MVC.Controllers
                 UnitsInStock = entity.UnitsInStock,
                 UnitsOnOrder = entity.UnitsOnOrder
             };
-            return Json(new { value = _unit.Product.Update(product) });
+            _unit.Product.Update(product);
+            return Json(new { option = "edit" });
         }
     }
 }

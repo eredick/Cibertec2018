@@ -17,6 +17,6 @@ namespace Proyecto.MVC.Controllers
         public ActionResult Index()
         {
             return View(_unit.Supplier.GetList());
-        }
+        }        
     }
 }
