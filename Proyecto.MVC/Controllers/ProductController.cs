@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -54,23 +56,26 @@ namespace Proyecto.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductVM entity)
+        public ActionResult Edit(ProductVM entity, Image picture)
         {
-            var product = new Product
+            if (ModelState.IsValid)
             {
-                CategoryID = entity.CategoryID,
-                Discontinued = entity.Discontinued,
-                Picture = entity.Picture,
-                ProductID = entity.ProductID,
-                ProductName = entity.ProductName,
-                QuantityPerUnit = entity.QuantityPerUnit,
-                ReorderLevel = entity.ReorderLevel,
-                SupplierID = entity.SupplierID,
-                UnitPrice = entity.UnitPrice,
-                UnitsInStock = entity.UnitsInStock,
-                UnitsOnOrder = entity.UnitsOnOrder
-            };
-            _unit.Product.Update(product);
+                var product = new Product
+                {
+                    CategoryID = entity.CategoryID,
+                    Discontinued = entity.Discontinued,
+                    Picture = entity.Picture,//imgByte,
+                    ProductID = entity.ProductID,
+                    ProductName = entity.ProductName,
+                    QuantityPerUnit = entity.QuantityPerUnit,
+                    ReorderLevel = entity.ReorderLevel,
+                    SupplierID = entity.SupplierID,
+                    UnitPrice = entity.UnitPrice,
+                    UnitsInStock = entity.UnitsInStock,
+                    UnitsOnOrder = entity.UnitsOnOrder
+                };
+                _unit.Product.Update(product);
+            }
             return Json(new { option = "edit" });
         }
     }
