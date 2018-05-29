@@ -194,6 +194,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Img\alto.png" />
     <Content Include="Img\logo.png" />
+    <Content Include="Models\NorthwindProject.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -252,7 +253,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
