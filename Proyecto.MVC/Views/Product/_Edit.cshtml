@@ -82,25 +82,26 @@
             }
             <div class="col-md-10">
                 <img id="imgProduct" src="@imgSrc" class="img-thumbnail" alt="Producto img" />
-                <label for="flpic" class="btn btn-default">Cambiar Imagen</label>
-                <input type="file" accept="image/*" id="flpic" name="flpic" style="visibility:hidden;" />
+                @*<label for="flpic" class="btn btn-default">Cambiar Imagen</label>
+                <input type="file" accept="image/*" id="flpic" name="flpic" style="visibility:hidden;" />*@
+                <div id="fUpload"></div>
                 @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        @*<div class="modal-footer">
+        <div class="modal-footer">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Grabar" class="btn btn-primary" />
             </div>
-        </div>*@
+        </div>
     </div>
 }
 
 <script>
     $(function () {
         $.validator.unobtrusive.parse("#productEdit");
-        $('#flpic').change(function () {
-            loadIamge(this);
-        });
+        //$('#flpic').change(function () {
+        //    loadIamge(this);
+        //});
     });
 </script>

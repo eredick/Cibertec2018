@@ -14,6 +14,8 @@ namespace Proyecto.MVC.Controllers
 {
     public class ProductController : BaseController
     {
+        public byte[] imgChange = null;
+
         public ProductController(IUnitOfWork unit) : base(unit)
         {
         }
@@ -56,7 +58,7 @@ namespace Proyecto.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductVM entity, Image picture)
+        public ActionResult Edit(ProductVM entity)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +66,7 @@ namespace Proyecto.MVC.Controllers
                 {
                     CategoryID = entity.CategoryID,
                     Discontinued = entity.Discontinued,
-                    Picture = entity.Picture,//imgByte,
+                    Picture = imgChange,
                     ProductID = entity.ProductID,
                     ProductName = entity.ProductName,
                     QuantityPerUnit = entity.QuantityPerUnit,
@@ -77,6 +79,19 @@ namespace Proyecto.MVC.Controllers
                 _unit.Product.Update(product);
             }
             return Json(new { option = "edit" });
+        }
+
+        [HttpPost]
+        public ActionResult UploadFile()
+        {
+            var myFile = Request.Files["imgFile"];
+
+            using (var binaryReader = new BinaryReader(myFile.InputStream))
+            {
+                imgChange = binaryReader.ReadBytes(myFile.ContentLength);
+            }
+
+            return Json(new { option = "complete" });
         }
     }
 }
