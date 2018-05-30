@@ -80,10 +80,10 @@
                     imgSrc = String.Format("data:image/jpg;base64, {0}", base64);
                 }
             }
-            <div class="col-md-10">
+            <div class="col-md-6">
                 <img id="imgProduct" src="@imgSrc" class="img-thumbnail" alt="Producto img" />
-                @*<label for="flpic" class="btn btn-default">Cambiar Imagen</label>
-                <input type="file" accept="image/*" id="flpic" name="flpic" style="visibility:hidden;" />*@
+            </div>
+            <div class="col-md-4">
                 <div id="fUpload"></div>
                 @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
             </div>
@@ -100,8 +100,5 @@
 <script>
     $(function () {
         $.validator.unobtrusive.parse("#productEdit");
-        //$('#flpic').change(function () {
-        //    loadIamge(this);
-        //});
     });
 </script>

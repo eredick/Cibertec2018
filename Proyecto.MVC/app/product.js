@@ -107,8 +107,6 @@ function getModal(ProductId) {
     $.get('/Product/Edit', param, function (data) {
         $('.modal-body').html(data);
         $('.modal-title').html('Editar Producto');
-
-
         $('#fUpload').dxFileUploader({
             accept: "image/*",
             labelText: "",
@@ -117,8 +115,7 @@ function getModal(ProductId) {
             uploadUrl: "/Product/UploadFile",
             onUploaded: function (value) {
                 var reader = new FileReader();
-                reader.onload = function (e) {
-                    byteImg = e.target.result;
+                reader.onload = function (e) {                    
                     $('#imgProduct').attr('src', `data:image/png;base64,${btoa(e.target.result)}`);
                 };
                 reader.readAsBinaryString(value.file);
@@ -135,44 +132,5 @@ function closeModal(option) {
     $("button[data-dismiss='modal']").click();
     $(".modal-body").html("");
     $(".modal-title").html("");
-
     $('#dgProducts').dxDataGrid('instance').refresh();
 }
-
-//var byteImg;
-//function loadIamge(file) {
-//    if (file.files && file.files[0]) {
-//        var reader = new FileReader();
-//        reader.onload = function (e) {
-//            byteImg = e.target.result;
-//            $('#imgProduct').attr('src', `data:image/png;base64,${btoa(e.target.result)}`);
-//        };
-
-//        reader.readAsBinaryString(file.files[0]);
-//    }
-//}
-
-//$('.btn-primary').click(function () {
-
-//    var param = {
-//        entity: {
-//            ProductID: $('#ProductID').val(),
-//            ProductName: $('#ProductName').val(),
-//            SupplierID: $('#SupplierID').val(),
-//            CategoryID: $('#CategoryID').val(),
-//            QuantityPerUnit: $('#QuantityPerUnit').val(),
-//            UnitPrice: $('#UnitPrice').val(),
-//            UnitsInStock: $('#UnitsInStock').val(),
-//            UnitsOnOrder: $('#UnitsOnOrder').val(),
-//            ReorderLevel: $('#ReorderLevel').val(),
-//            Discontinued: $('#Discontinued').val()
-//            //Picture: byteImg
-//        },
-//        picture: byteImg
-//    };
-
-//    $.post('/Product/Edit', param, function (data) {
-
-//        success(data);
-//    });
-//});

@@ -14,7 +14,7 @@ namespace Proyecto.MVC.Controllers
 {
     public class ProductController : BaseController
     {
-        public byte[] imgChange = null;
+        //public byte[] imgChange = null;
 
         public ProductController(IUnitOfWork unit) : base(unit)
         {
@@ -65,8 +65,7 @@ namespace Proyecto.MVC.Controllers
                 var product = new Product
                 {
                     CategoryID = entity.CategoryID,
-                    Discontinued = entity.Discontinued,
-                    Picture = imgChange,
+                    Discontinued = entity.Discontinued,                    
                     ProductID = entity.ProductID,
                     ProductName = entity.ProductName,
                     QuantityPerUnit = entity.QuantityPerUnit,
@@ -76,6 +75,12 @@ namespace Proyecto.MVC.Controllers
                     UnitsInStock = entity.UnitsInStock,
                     UnitsOnOrder = entity.UnitsOnOrder
                 };
+
+                if (Session["imgChange"] != null)
+                {
+                    product.Picture = (byte[])Session["imgChange"];
+                }
+
                 _unit.Product.Update(product);
             }
             return Json(new { option = "edit" });
@@ -88,10 +93,10 @@ namespace Proyecto.MVC.Controllers
 
             using (var binaryReader = new BinaryReader(myFile.InputStream))
             {
-                imgChange = binaryReader.ReadBytes(myFile.ContentLength);
+                Session["imgChange"] = binaryReader.ReadBytes(myFile.ContentLength);
             }
 
-            return Json(new { option = "complete" });
+            return Json(new { option = "complete!" });
         }
     }
 }
