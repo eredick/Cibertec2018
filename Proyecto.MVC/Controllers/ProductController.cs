@@ -25,11 +25,19 @@ namespace Proyecto.MVC.Controllers
             return View();
         }
 
-        public ActionResult GetProductsPaged(Product entity, int start, int end)
+        public ActionResult GetProductsPaged(ProductVM entity, int start, int end)
         {
             var lProducts = _unit.Product.GetProducstPaged(entity, start, end);
-            var count = _unit.Product.CountProductsPaged();
+            var count = _unit.Product.CountProductsPaged(entity);
             return Json(new { lProducts, count });
+        }
+
+        [CustomAuthorize(Roles = "Admin")]
+        public ActionResult Create()
+        {
+            ViewBag.cmbSupplier = _unit.Supplier.GetList();
+            ViewBag.cmbCategory = _unit.Categories.GetList();
+            return PartialView("_Create");
         }
 
         [CustomAuthorize(Roles = "Admin")]
@@ -51,6 +59,7 @@ namespace Proyecto.MVC.Controllers
                 UnitsOnOrder = product.UnitsOnOrder
             };
 
+            Session["imgChange"] = null;
             ViewBag.cmbSupplier = _unit.Supplier.GetList();
             ViewBag.cmbCategory = _unit.Categories.GetList();
 
@@ -65,7 +74,7 @@ namespace Proyecto.MVC.Controllers
                 var product = new Product
                 {
                     CategoryID = entity.CategoryID,
-                    Discontinued = entity.Discontinued,                    
+                    Discontinued = entity.Discontinued,
                     ProductID = entity.ProductID,
                     ProductName = entity.ProductName,
                     QuantityPerUnit = entity.QuantityPerUnit,

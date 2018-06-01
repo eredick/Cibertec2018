@@ -18,11 +18,16 @@ namespace Proyecto.Repositories.Dapper.Northwind
         {
         }
 
-        public int CountProductsPaged()
+        public int CountProductsPaged(ProductVM entity)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                return connection.GetAll<Product>().Count();
+                var parameters = new DynamicParameters();
+                parameters.Add("@productName", entity.ProductName);
+                parameters.Add("@companyName", entity.CompanyName);
+                parameters.Add("@categoryName", entity.CategoryName);
+
+                return connection.ExecuteScalar<int>("GetCountAllProducts", parameters, commandType: System.Data.CommandType.StoredProcedure);//lProducts.Count();
             }
         }
 
@@ -31,14 +36,14 @@ namespace Proyecto.Repositories.Dapper.Northwind
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ProductVM> GetProducstPaged(Product entity, int start, int end)
+        public IEnumerable<ProductVM> GetProducstPaged(ProductVM entity, int start, int end)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@productName", entity.ProductName);
-                parameters.Add("@supplierId", entity.SupplierID);
-                parameters.Add("@categoryId", entity.CategoryID);
+                parameters.Add("@companyName", entity.CompanyName);
+                parameters.Add("@categoryName", entity.CategoryName);
                 parameters.Add("start", start);
                 parameters.Add("end", end);
 
@@ -54,7 +59,7 @@ namespace Proyecto.Repositories.Dapper.Northwind
                 return connection.Get<Product>(Id);
             }
         }
-        
+
         public int InsertProduct(Product entity)
         {
             using (var connection = new SqlConnection(_connectionString))

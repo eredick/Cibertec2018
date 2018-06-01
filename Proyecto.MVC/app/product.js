@@ -1,11 +1,36 @@
 ﻿var productsPaged = new DevExpress.data.CustomStore({
     load: function (loadOptions) {
         var def = $.Deferred();
-
+        var prodName = '', catName = '';
+        if (loadOptions.filter) {
+            if (Array.isArray(loadOptions.filter[0])) {
+                $.each(loadOptions.filter, function (index, value) {
+                    if (value.length > 0) {
+                        switch (value[0]) {
+                            case 'ProductName':
+                                prodName = value[2];
+                                break;
+                            case 'CategoryName':
+                                catName = value[2];
+                                break;
+                        }
+                    }
+                });
+            } else {
+                var value = loadOptions.filter;
+                switch (value[0]) {
+                    case 'ProductName':
+                        prodName = value[2];
+                        break;
+                    case 'CategoryName':
+                        catName = value[2];
+                        break;
+                }
+            }
+        }
         var oProduct = {
-            ProductName: '',
-            SupplierID: 0,
-            CategoryID: 0
+            ProductName: prodName,
+            CategoryName: catName
         };
         var start = loadOptions.skip;
         var end = loadOptions.take;
@@ -27,7 +52,13 @@ $('#dgProducts').dxDataGrid({
         store: productsPaged
     },
     remoteOperations: {
-        paging: true
+        paging: true,
+        filtering: true
+    },
+    filterRow: {
+        visible: true,
+        applyFilter: "auto",
+        showOperationChooser: false
     },
     paging: {
         pageSize: 20
@@ -46,7 +77,8 @@ $('#dgProducts').dxDataGrid({
         dataField: 'QuantityPerUnit',
         caption: 'CantidadxUnidad',
         width: 150,
-        hidingPriority: 0
+        hidingPriority: 0,
+        allowFiltering: false
     },
     {
         dataField: 'UnitPrice',
@@ -55,19 +87,22 @@ $('#dgProducts').dxDataGrid({
             type: 'fixedPoint',
             precision: 2
         },
+        allowFiltering: false,
         width: 100
     },
     {
         dataField: 'UnitsInStock',
         caption: 'En Stock',
         width: 100,
-        hidingPriority: 2
+        hidingPriority: 2,
+        allowFiltering: false
     },
     {
         dataField: 'UnitsOnOrder',
         caption: 'En Orden',
         width: 100,
-        hidingPriority: 1
+        hidingPriority: 1,
+        allowFiltering: false
     },
     {
         caption: '',
@@ -77,17 +112,6 @@ $('#dgProducts').dxDataGrid({
             $('<div class="row">').appendTo(container);
             $('<div class="col-md-6">').appendTo(container.find('.row'));
             $('<a href="#" data-toggle="modal" data-target="#modal-container" onclick="getModal(' + options.data.ProductID + ')" > <span class="glyphicon glyphicon-edit">').appendTo(container.find('.col-md-6'));
-
-            //$('<span id="e_' + options.data.ProductID + '" class="glyphicon glyphicon-edit" >').appendTo(container.find('.col-md-6'))
-            //    .on('click', function (e) {
-            //        var param = {
-            //            Id: $(this).attr('id').replace('e_', '')
-            //        };
-            //        $.get('/Product/Edit', param, function (data) {
-            //            $('.modal-body').html(data);
-            //            $('.modal-title').html('Editar Producto');                        
-            //        });
-            //    });
 
             //$('<div class="col-md-6">').appendTo(container.find('.row'));
             //$('<span id="d_' + options.data.ProductID + '" class="glyphicon glyphicon-trash">').appendTo(container.find('.col-md-6:last-child'))
@@ -100,28 +124,54 @@ $('#dgProducts').dxDataGrid({
 }).dxDataGrid('instance');
 
 function getModal(ProductId) {
-    var param = {
-        Id: ProductId
-    };
 
-    $.get('/Product/Edit', param, function (data) {
-        $('.modal-body').html(data);
-        $('.modal-title').html('Editar Producto');
-        $('#fUpload').dxFileUploader({
-            accept: "image/*",
-            labelText: "",
-            name: "imgFile",
-            selectButtonText: "Seleccione Imagen",
-            uploadUrl: "/Product/UploadFile",
-            onUploaded: function (value) {
-                var reader = new FileReader();
-                reader.onload = function (e) {                    
-                    $('#imgProduct').attr('src', `data:image/png;base64,${btoa(e.target.result)}`);
-                };
-                reader.readAsBinaryString(value.file);
-            }
+    if (ProductId) {
+        var param = {
+            Id: ProductId
+        };
+
+        $.get('/Product/Edit', param, function (data) {
+            $('.modal-body').html(data);
+            $('.modal-title').html('Editar Producto');
+            $('#fUpload').dxFileUploader({
+                accept: "image/*",
+                labelText: "",
+                name: "imgFile",
+                selectButtonText: "Cambiar Imagen",
+                icon: "update",
+                uploadUrl: "/Product/UploadFile",
+                onUploaded: function (value) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imgProduct').attr('src', `data:image/png;base64,${btoa(e.target.result)}`);
+                    };
+                    reader.readAsBinaryString(value.file);
+                }
+            });
         });
-    });
+    }
+    else {
+        $.get('/Product/Create', param, function (data) {
+            $('.modal-body').html(data);
+            $('.modal-title').html('Registrar Producto');
+            $('#fUpload').dxFileUploader({
+                accept: "image/*",
+                labelText: "",
+                name: "imgFile",
+                selectButtonText: "Cambiar Imagen",
+                icon: "update",
+                uploadUrl: "/Product/UploadFile",
+                onUploaded: function (value) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imgProduct').attr('src', `data:image/png;base64,${btoa(e.target.result)}`);
+                    };
+                    reader.readAsBinaryString(value.file);
+                }
+            });
+        });
+    }
+
 }
 
 function success(data) {
