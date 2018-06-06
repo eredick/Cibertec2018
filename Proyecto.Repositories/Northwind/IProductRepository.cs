@@ -12,6 +12,7 @@ namespace Proyecto.Repositories.Northwind
     {
         int InsertProduct(Product entity);
         IEnumerable<ProductVM> GetProducstPaged(ProductVM entity, int start, int end);
+        IEnumerable<ProductVM> GetAllProducstPaged(ProductVM entity, int start, int end);
         int CountProductsPaged(ProductVM entity);
         Product GetProductById(int Id);
         bool UpdateProduct(Product entity);

@@ -36,6 +36,22 @@ namespace Proyecto.Repositories.Dapper.Northwind
             throw new NotImplementedException();
         }
 
+        public IEnumerable<ProductVM> GetAllProducstPaged(ProductVM entity, int start, int end)
+        {
+             using (var connection = new SqlConnection(_connectionString))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@productName", entity.ProductName);
+                parameters.Add("@companyName", entity.CompanyName);
+                parameters.Add("@categoryName", entity.CategoryName);
+                parameters.Add("start", start);
+                parameters.Add("end", end);
+
+                var lProducts = connection.Query<ProductVM>("GetAllProductsPaged", parameters, commandType: System.Data.CommandType.StoredProcedure);
+                return lProducts;
+            }
+        }
+
         public IEnumerable<ProductVM> GetProducstPaged(ProductVM entity, int start, int end)
         {
             using (var connection = new SqlConnection(_connectionString))

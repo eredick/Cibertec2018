@@ -25,7 +25,7 @@ namespace Proyecto.MVC.Controllers
             return View();
         }
 
-        public ActionResult GetProductsPaged(ProductVM entity, int start, int end)
+        public JsonResult GetProductsPaged(ProductVM entity, int start, int end)
         {
             var lProducts = _unit.Product.GetProducstPaged(entity, start, end);
             var count = _unit.Product.CountProductsPaged(entity);

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Proyecto.Models.ViewModels.ProductVM>
+
+@{ int i = 0; }
+@foreach (var item in Model)
+{
+    if (i % 3 == 0)
+    {
+        @Html.Raw("<div class='row'>");
+    }
+
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                @{
+                    var imgSrc = "";
+
+                    if (item.Picture != null)
+                    {
+                        var base64 = Convert.ToBase64String(item.Picture);
+                        imgSrc = String.Format("data:image/jpg;base64, {0}", base64);
+                    }
+                }
+                <img id="imgProduct" src="@imgSrc" class="img-thumbnail" alt="Producto img" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="h3">@item.ProductName</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                Stock: @item.UnitsInStock
+            </div>
+        </div>
+        <div class="row">
+            <hr />
+        </div>
+    </div>
+
+    if ((i + 1) % 3 == 0)
+    {
+        @Html.Raw("</div>");
+    }
+    i++;
+}
